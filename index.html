@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musfir's World</title>
+<meta name="description" content="Musfir's colorful personal website — photos, games and more!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Hey there, welcome to Musfir's World! 🌈</h1>
+      <p>Come check out my coolest photos, play some awesome games, and say hi!</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="gallery.html">📸 See My Gallery</a>
+        <a class="btn btn-secondary" href="games.html">🎮 Play Games</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">📷 Recent Photos</h2>
+      <p class="section-subtitle">A peek at my latest adventures</p>
+      <div class="card-grid" id="featuredPhotos"></div>
+      <div style="text-align:center; margin-top:30px;">
+        <a class="btn btn-outline" href="gallery.html">View Full Gallery →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;">
+    <div class="container">
+      <h2 class="section-title">🎮 Top Games</h2>
+      <p class="section-subtitle">My favorite things to play</p>
+      <div class="card-grid" id="featuredGames"></div>
+      <div style="text-align:center; margin-top:30px;">
+        <a class="btn btn-outline" href="games.html">See All Games →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

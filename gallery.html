@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Musfir's World</title>
+<meta name="description" content="Photo gallery — upload and view photos!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a class="active" href="gallery.html">Gallery</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>📸 My Photo Gallery</h1>
+    <p>Check out my pictures, or add your own!</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+
+      <div class="dropzone" id="dropzone" tabindex="0">
+        <span class="emoji">🖼️</span>
+        <p>Drag &amp; drop photos here, or click to choose files</p>
+        <input type="file" id="fileInput" accept="image/*" multiple>
+      </div>
+
+      <div class="card-grid" id="galleryGrid"></div>
+
+    </div>
+  </section>
+</main>
+
+<div class="modal-overlay" id="lightbox">
+  <div class="modal-box">
+    <button class="modal-close" id="lightboxClose">✕</button>
+    <div class="modal-media" id="lightboxMedia"></div>
+    <div class="modal-body">
+      <h3 id="lightboxTitle"></h3>
+      <p class="card-meta" id="lightboxDate"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>

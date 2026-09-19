@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games — Musfir's World</title>
+<meta name="description" content="Play fun mini-games!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a class="active" href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>🎮 Games Zone</h1>
+    <p>Pick a game below and start playing!</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+
+      <div class="game-menu">
+        <a class="card icon-card" href="#tictactoe">
+          <span class="emoji">⭕</span>
+          <h3>Tic-Tac-Toe</h3>
+        </a>
+        <a class="card icon-card" href="#memory">
+          <span class="emoji">🧠</span>
+          <h3>Memory Match</h3>
+        </a>
+        <a class="card icon-card" href="#snake">
+          <span class="emoji">🐍</span>
+          <h3>Snake</h3>
+        </a>
+        <a class="card icon-card" href="minecraft.html">
+          <span class="emoji">🧱</span>
+          <h3>Minecraft Corner</h3>
+        </a>
+      </div>
+
+      <!-- Tic Tac Toe -->
+      <div class="game-section" id="tictactoe">
+        <h2>⭕ Tic-Tac-Toe</h2>
+        <p class="game-status" id="tttStatus">Player X's turn</p>
+        <div class="ttt-board" id="tttBoard"></div>
+        <div style="text-align:center;">
+          <button class="btn btn-primary btn-sm" id="tttReset">🔄 New Game</button>
+        </div>
+      </div>
+
+      <!-- Memory Match -->
+      <div class="game-section" id="memory">
+        <h2>🧠 Memory Match</h2>
+        <p class="game-status" id="memoryStatus">Moves: 0</p>
+        <div class="memory-board" id="memoryBoard"></div>
+        <div style="text-align:center;">
+          <button class="btn btn-primary btn-sm" id="memoryReset">🔄 New Game</button>
+        </div>
+      </div>
+
+      <!-- Snake -->
+      <div class="game-section" id="snake">
+        <h2>🐍 Snake</h2>
+        <p class="game-status" id="snakeStatus">Score: 0</p>
+        <div class="snake-wrap">
+          <canvas id="snakeCanvas" width="320" height="320"></canvas>
+          <div class="touch-controls">
+            <button class="tc-up" data-dir="up">⬆️</button>
+            <button class="tc-left" data-dir="left">⬅️</button>
+            <button class="tc-down" data-dir="down">⬇️</button>
+            <button class="tc-right" data-dir="right">➡️</button>
+          </div>
+          <button class="btn btn-primary btn-sm" id="snakeReset">🔄 Start / Restart</button>
+          <p class="card-meta">Use arrow keys, WASD, or the buttons above</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script src="js/tictactoe.js"></script>
+<script src="js/memory.js"></script>
+<script src="js/snake.js"></script>
+</body>
+</html>

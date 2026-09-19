@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft Corner — Musfir's World</title>
+<meta name="description" content="Build with blocks, favorite servers, and a builds showcase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a class="active" href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>🧱 Minecraft Corner</h1>
+    <p>Build something cool, check out favorite servers, and show off creations!</p>
+    <a class="btn btn-outline btn-sm" href="games.html">← Back to Games</a>
+  </div>
+
+  <section class="section" style="padding-top:30px;">
+    <div class="container">
+
+      <div class="game-section">
+        <h2>🧰 Block Builder</h2>
+        <p class="game-status">Pick a block, then click or drag on the grid to build!</p>
+        <div class="builder-wrap">
+          <div class="palette" id="palette"></div>
+          <canvas id="builderCanvas" width="320" height="320"></canvas>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <button class="btn btn-danger btn-sm" id="builderClear">🧹 Clear</button>
+            <button class="btn btn-primary btn-sm" id="builderSave">💾 Save to Showcase</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;">
+    <div class="container">
+      <h2 class="section-title">⭐ Favorite Servers</h2>
+      <p class="section-subtitle">Servers I love to play on</p>
+      <div class="card-grid" id="serverGrid"></div>
+      <form class="small-form" id="serverForm">
+        <input type="text" id="serverName" placeholder="Server name" required>
+        <input type="text" id="serverAddress" placeholder="Address (e.g. play.example.com)" required>
+        <input type="text" id="serverNote" placeholder="Why I like it">
+        <button class="btn btn-secondary btn-sm" type="submit">➕ Add Server</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">🏆 Builds Showcase</h2>
+      <p class="section-subtitle">Cool creations, saved from the builder above</p>
+      <div class="card-grid" id="buildsGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script src="js/minecraft.js"></script>
+</body>
+</html>
