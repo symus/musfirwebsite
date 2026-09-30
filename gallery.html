@@ -38,6 +38,8 @@
         <input type="file" id="fileInput" accept="image/*" multiple>
       </div>
 
+      <p class="form-note" id="cloudStatus" style="margin-bottom:24px;"></p>
+
       <div class="card-grid" id="galleryGrid"></div>
 
     </div>
@@ -66,7 +68,10 @@
   <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/cloud.js"></script>
 <script src="js/main.js"></script>
 <script src="js/gallery.js"></script>
 </body>

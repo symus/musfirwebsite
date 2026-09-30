@@ -1,8 +1,10 @@
-/* Gallery page: render grid, handle uploads, lightbox */
+/* Gallery page: render grid, handle uploads, lightbox. Uses Supabase
+   cloud storage when configured (see js/supabase-config.js), otherwise
+   falls back to this browser's localStorage. */
 
 const GALLERY_KEY = 'musfir_gallery_photos';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const grid = document.getElementById('galleryGrid');
   const dropzone = document.getElementById('dropzone');
   const fileInput = document.getElementById('fileInput');
@@ -11,10 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxDate = document.getElementById('lightboxDate');
   const lightboxClose = document.getElementById('lightboxClose');
+  const cloudStatus = document.getElementById('cloudStatus');
 
   if (!grid) return;
 
-  let photos = loadList(GALLERY_KEY, SEED_PHOTOS);
+  const usingCloud = cloudEnabled();
+  let photos = [];
+
+  if (usingCloud) {
+    cloudStatus.textContent = '☁️ Photos are saved online — everyone can see them!';
+    photos = await fetchCloudPhotos();
+  } else {
+    cloudStatus.textContent = '💻 Cloud storage isn\'t set up yet, so photos only save on this device. Ask a grown-up to check the README!';
+    photos = loadList(GALLERY_KEY, SEED_PHOTOS);
+  }
 
   function render() {
     if (!photos.length) {
@@ -29,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-body">
           <h3>${escapeHtml(p.title)}</h3>
           <span class="card-meta">${p.date}</span>
+          ${usingCloud ? '' : `
           <div class="card-actions">
             <button class="btn btn-danger btn-sm" data-delete="${p.id}">🗑️ Delete</button>
-          </div>
+          </div>`}
         </div>
       </div>
     `).join('');
@@ -81,25 +94,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeLightbox();
   });
 
-  function handleFiles(files) {
-    [...files].forEach((file) => {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const title = file.name.replace(/\.[^/.]+$/, '') || 'My Photo';
-        photos.push({
-          id: uid(),
-          title,
-          date: todayStr(),
-          emoji: '📷',
-          color: randomColor(),
-          src: e.target.result,
-        });
-        saveList(GALLERY_KEY, photos);
-        render();
-      };
-      reader.readAsDataURL(file);
-    });
+  async function handleFiles(files) {
+    for (const file of [...files]) {
+      if (!file.type.startsWith('image/')) continue;
+      const title = file.name.replace(/\.[^/.]+$/, '') || 'My Photo';
+
+      if (usingCloud) {
+        try {
+          const photo = await uploadCloudPhoto(file, title);
+          photos.push(photo);
+          render();
+        } catch (err) {
+          alert('Oops, that photo could not be uploaded: ' + err.message);
+        }
+        continue;
+      }
+
+      await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          photos.push({
+            id: uid(),
+            title,
+            date: todayStr(),
+            emoji: '📷',
+            color: randomColor(),
+            src: e.target.result,
+          });
+          saveList(GALLERY_KEY, photos);
+          render();
+          resolve();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
   }
 
   dropzone.addEventListener('click', () => fileInput.click());

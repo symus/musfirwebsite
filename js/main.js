@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFeaturedGames();
 });
 
+async function getRecentPhotos(count) {
+  if (typeof cloudEnabled === 'function' && cloudEnabled()) {
+    const photos = await fetchCloudPhotos();
+    return photos.slice(-count).reverse();
+  }
+  return loadList('musfir_gallery_photos', SEED_PHOTOS).slice(-count).reverse();
+}
+
 function mediaHtml(item) {
   if (item.src) {
     return `<img src="${item.src}" alt="${escapeHtml(item.title)}">`;
@@ -33,10 +41,10 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-function renderFeaturedPhotos() {
+async function renderFeaturedPhotos() {
   const wrap = document.getElementById('featuredPhotos');
   if (!wrap) return;
-  const photos = loadList('musfir_gallery_photos', SEED_PHOTOS).slice(-4).reverse();
+  const photos = await getRecentPhotos(4);
   wrap.innerHTML = photos.map((p) => `
     <div class="card">
       ${p.src ? `<div class="card-media"><img src="${p.src}" alt="${escapeHtml(p.title)}"></div>` : `<div class="card-media" style="background:${p.color}">${p.emoji}</div>`}
