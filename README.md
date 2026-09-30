@@ -41,7 +41,7 @@ By default, uploaded photos only save in the browser they were uploaded from. To
 **3. Run the database setup script**
 - In the left sidebar, go to **SQL Editor** → **New query**.
 - Open [`supabase/schema.sql`](supabase/schema.sql) from this repo, paste its contents in, and click **Run**.
-- This creates the `photos` table and the access rules: anyone can view and upload photos (no login system exists on the site), but nobody can delete through the website itself — photos can only be removed by a grown-up directly in the Supabase dashboard (**Table Editor** → `photos`, and **Storage** → `gallery-photos`).
+- This creates the `photos` table and the access rules: anyone can *view* photos, only people **signed in with Google** can *upload* one (see next section), and nobody can delete through the website itself — photos can only be removed by a grown-up directly in the Supabase dashboard (**Table Editor** → `photos`, and **Storage** → `gallery-photos`).
 
 **4. Copy your project's API keys**
 - Go to **Project Settings** (gear icon) → **API**.
@@ -55,6 +55,34 @@ By default, uploaded photos only save in the browser they were uploaded from. To
   ```
 - Commit and push (or edit the file directly on GitHub and commit there).
 
-Once those two values are filled in, the Gallery page and the homepage's "Recent Photos" automatically switch to cloud mode — new uploads are stored in Supabase and visible to every visitor.
+Once those two values are filled in, the Gallery page and the homepage's "Recent Photos" automatically switch to cloud mode — everyone can view photos, and signing in with Google (next section) is required to upload one.
 
-**Heads up:** because the site has no login system, anyone who visits the gallery can upload a photo (not delete — see step 3). If that's a concern, the next step would be adding a simple login/password gate before uploads are allowed — ask if you'd like that built too.
+## Turn on Google Sign-In
+
+This site uses [Supabase Auth](https://supabase.com/docs/guides/auth) for "Sign in with Google" — it reuses the same Supabase project from above, so there's no second service to sign up for. Do this after finishing the steps above.
+
+**1. Create a Google OAuth client**
+- Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a project (or reuse one).
+- Go to **APIs & Services → OAuth consent screen**. Choose **External**, fill in an app name (e.g. "Musfir's World"), your email as the support/contact email, and save. **Leave publishing status as "Testing"** — see the note below on why.
+- Under the consent screen's **Audience** (or **Test users**) section, add the Google email address of every family member who should be able to sign in — Musfir's, yours, etc. Only these exact accounts will be able to complete sign-in; everyone else is blocked by Google itself before they ever reach the site.
+- Go to **APIs & Services → Credentials → Create Credentials → OAuth client ID**. Application type: **Web application**.
+- You'll need one URL from Supabase first: in your Supabase dashboard, go to **Authentication → Providers → Google**, and copy the **Callback URL** shown there (looks like `https://your-project-id.supabase.co/auth/v1/callback`). Paste that into **Authorized redirect URIs** on the Google Cloud form, then create the client.
+- Copy the **Client ID** and **Client Secret** Google gives you.
+
+**2. Turn on the Google provider in Supabase**
+- Back in Supabase: **Authentication → Providers → Google** → paste in the Client ID and Client Secret → **Enable** → Save.
+
+**3. Allow this site's URL to receive the sign-in redirect**
+- In Supabase: **Authentication → URL Configuration → Redirect URLs**, add:
+  ```
+  https://symus.github.io/musfirwebsite/**
+  ```
+  (add `http://localhost:8080/**` too if you want Google Sign-In to work when testing locally).
+
+That's it — every page now shows a **"Sign in with Google"** button in the top nav, which becomes a **"👋 Hi, {name}!"** greeting once signed in, with a photo and a sign-out button. Uploading a gallery photo requires being signed in.
+
+**Why "Testing" mode matters:** while the OAuth consent screen is in Testing status, only the email addresses you explicitly added as test users can sign in at all — this is what limits the site to "Musfir + invited family" without any extra code. Moving it to "Production"/verified would open sign-in to any Google account, which isn't what we want here.
+
+## Roadmap: AI website-builder chat agent
+
+There's an idea on the table for a chat widget (bottom-right corner) where signed-in, approved family members could describe a website to an AI agent and have it generate and publish one — plus possibly other AI-offered services. This is intentionally **not built yet**: it's a much larger project than the rest of this site (needs its own backend, an LLM API key with cost controls, and a plan for hosting whatever it generates), and deserves its own scoping conversation before writing code. Flagging it here so it isn't lost — ask to pick this up whenever you're ready to scope it properly.

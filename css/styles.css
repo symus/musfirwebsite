@@ -150,6 +150,28 @@ a {
   color: #fff;
 }
 
+.auth-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0 4px;
+}
+
+.auth-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .nav-toggle {
   display: none;
   background: none;

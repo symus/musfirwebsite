@@ -19,13 +19,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const usingCloud = cloudEnabled();
   let photos = [];
+  let currentUser = null;
 
   if (usingCloud) {
-    cloudStatus.textContent = '☁️ Photos are saved online — everyone can see them!';
+    cloudStatus.textContent = '☁️ Photos are saved online for everyone to see. Sign in with Google (top of the page) to upload your own!';
     photos = await fetchCloudPhotos();
+
+    const client = getSupabaseClient();
+    const { data } = await client.auth.getSession();
+    currentUser = data.session ? data.session.user : null;
+    client.auth.onAuthStateChange((_event, session) => {
+      currentUser = session ? session.user : null;
+    });
   } else {
     cloudStatus.textContent = '💻 Cloud storage isn\'t set up yet, so photos only save on this device. Ask a grown-up to check the README!';
     photos = loadList(GALLERY_KEY, SEED_PHOTOS);
+  }
+
+  function blockedBySignIn() {
+    if (usingCloud && !currentUser) {
+      alert('Please sign in with Google at the top of the page before uploading a photo! 🔑');
+      return true;
+    }
+    return false;
   }
 
   function render() {
@@ -130,9 +146,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('click', () => {
+    if (blockedBySignIn()) return;
+    fileInput.click();
+  });
   dropzone.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') fileInput.click();
+    if (e.key === 'Enter' || e.key === ' ') {
+      if (blockedBySignIn()) return;
+      fileInput.click();
+    }
   });
   fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
@@ -149,6 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
   dropzone.addEventListener('drop', (e) => {
+    if (blockedBySignIn()) return;
     if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
   });
 

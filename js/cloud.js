@@ -4,27 +4,12 @@ const GALLERY_BUCKET = 'gallery-photos';
 const GALLERY_TABLE = 'photos';
 const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
 
-let _supabaseClient = null;
-
-function cloudEnabled() {
-  return typeof SUPABASE_URL === 'string' && SUPABASE_URL.length > 0 &&
-    typeof SUPABASE_ANON_KEY === 'string' && SUPABASE_ANON_KEY.length > 0 &&
-    typeof supabase !== 'undefined';
-}
-
-function getCloudClient() {
-  if (!_supabaseClient) {
-    _supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-  return _supabaseClient;
-}
-
 function publicPhotoUrl(client, path) {
   return client.storage.from(GALLERY_BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
 async function fetchCloudPhotos() {
-  const client = getCloudClient();
+  const client = getSupabaseClient();
   const { data, error } = await client
     .from(GALLERY_TABLE)
     .select('id, title, photo_date, path, created_at')
@@ -45,7 +30,7 @@ async function uploadCloudPhoto(file, title) {
   if (file.size > MAX_UPLOAD_BYTES) {
     throw new Error('That photo is too big (max 8MB).');
   }
-  const client = getCloudClient();
+  const client = getSupabaseClient();
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
   const path = `${crypto.randomUUID()}.${ext}`;
 
