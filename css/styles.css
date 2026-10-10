@@ -549,6 +549,108 @@ a {
   cursor: default;
 }
 
+/* Custom matching game (create + play) */
+
+.match-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  max-width: 640px;
+  margin: 0 auto 20px;
+}
+
+.match-card {
+  min-height: 90px;
+  border-radius: var(--radius-sm);
+  background: var(--sky);
+  color: transparent;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  word-break: break-word;
+}
+
+.match-card.flipped, .match-card.matched {
+  background: #fff;
+  color: var(--dark);
+  border: 2px solid var(--yellow);
+}
+
+.match-card.matched {
+  border-color: var(--grass);
+  cursor: default;
+}
+
+.pair-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pair-row input {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid #e5e7eb;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.pair-row input:focus {
+  outline: none;
+  border-color: var(--sky);
+}
+
+.pair-row .pair-remove {
+  background: none;
+  border: none;
+  color: var(--coral);
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.share-link-box {
+  display: none;
+  background: #eafff0;
+  border: 2px solid var(--grass);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.share-link-box.show {
+  display: block;
+  animation: pop 0.25s ease;
+}
+
+.share-link-row {
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+  margin: 14px auto;
+}
+
+.share-link-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid #e5e7eb;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
 /* Snake */
 
 .snake-wrap {

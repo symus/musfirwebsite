@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play a Matching Game — Musfir's World</title>
+<meta name="description" content="Play a custom matching game made with Musfir's World!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li id="authItem" class="auth-item"></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1 id="playTitle">🧩 Matching Game</h1>
+    <p>Flip two cards at a time to find the matching pairs!</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container" style="max-width:700px;">
+
+      <div class="game-section">
+        <p class="game-status" id="playStatus">Moves: 0</p>
+        <div class="match-board" id="playBoard"></div>
+        <div style="text-align:center; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-sm" id="playReset">🔄 Play Again</button>
+          <a class="btn btn-outline btn-sm" href="create.html">🛠️ Make Your Own</a>
+        </div>
+      </div>
+
+      <div class="empty-state" id="playEmpty" style="display:none;">
+        No game found in this link — it may be broken or incomplete.<br>
+        <a class="btn btn-primary btn-sm" href="create.html" style="margin-top:14px;">🛠️ Create a Game</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/match-game.js"></script>
+<script src="js/play-game.js"></script>
+</body>
+</html>

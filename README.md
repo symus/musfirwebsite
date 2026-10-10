@@ -8,6 +8,7 @@ A fun, colorful personal website built with plain HTML, CSS and JavaScript — n
 - **Gallery** (`gallery.html`) — photo grid with drag-and-drop / click-to-upload, and a full-screen lightbox viewer.
 - **Games** (`games.html`) — Tic-Tac-Toe, Memory Match, and Snake, all playable with mouse, keyboard, or touch.
 - **Minecraft Corner** (`minecraft.html`) — a block-building canvas toy, a favorite-servers list, and a builds showcase gallery.
+- **Create Your Own Game** (`create.html` / `play.html`) — a Wordwall-style matching-game maker (Beta). Type in pairs (e.g. "Cat" ↔ "🐱"), get a shareable link, and anyone who opens it can play — no sign-in or database required, since the game's content is encoded directly in the link itself.
 - **Contact** (`contact.html`) — a kid-safe contact form with friendly on-submit feedback.
 
 ## Running locally

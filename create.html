@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create a Game — Musfir's World</title>
+<meta name="description" content="Make your own matching game and share it with friends!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="index.html">🚀 Musfir's World</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a class="active" href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li id="authItem" class="auth-item"></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>🛠️ Create Your Own Matching Game</h1>
+    <p>Type in some pairs, make a game, and share the link with friends! <span class="card-meta">(Beta)</span></p>
+    <a class="btn btn-outline btn-sm" href="games.html">← Back to Games</a>
+  </div>
+
+  <section class="section" style="padding-top:20px;">
+    <div class="container" style="max-width:700px;">
+
+      <div class="game-section">
+        <div class="form-group">
+          <label for="gameTitle">Game title</label>
+          <input type="text" id="gameTitle" maxlength="60" placeholder="e.g. Animal Sounds" value="My Matching Game">
+        </div>
+
+        <label>Pairs to match (each row is one pair — e.g. "Cat" ↔ "🐱", or "Capital of France" ↔ "Paris")</label>
+        <div id="pairRows" style="margin-top:10px;"></div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px;">
+          <button class="btn btn-outline btn-sm" id="addPairBtn" type="button">➕ Add Pair</button>
+        </div>
+
+        <div style="text-align:center; margin-top:24px;">
+          <button class="btn btn-primary" id="createBtn" type="button">🎮 Create My Game</button>
+        </div>
+
+        <div class="share-link-box" id="shareBox">
+          <span class="emoji">🎉</span>
+          <h3>Your game is ready!</h3>
+          <p>Share this link so anyone can play it — no sign-in needed.</p>
+          <div class="share-link-row">
+            <input type="text" id="shareLinkInput" readonly>
+            <button class="btn btn-secondary btn-sm" id="copyLinkBtn">📋 Copy</button>
+          </div>
+          <a class="btn btn-accent" id="playNowBtn" href="#">▶️ Play it now</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="games.html">Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-tagline">Made with 💛 by Musfir</p>
+  <p class="footer-note">&copy; <span class="footer-year"></span> Musfir's World. Ask a grown-up before sharing anything online!</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/match-game.js"></script>
+<script src="js/create-game.js"></script>
+</body>
+</html>
